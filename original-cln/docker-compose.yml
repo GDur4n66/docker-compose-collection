@@ -6,7 +6,7 @@ services:
     image: elementsproject/lightningd:v0.12.1
     restart: on-failure
     volumes:
-      - "/home/keiichi/temp/lightning:/root/.lightning"
+      - "/home/fogefoge/lightning:/root/.lightning"
     ports:
       - "39735:39735"
     environment:
