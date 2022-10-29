@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  
+  cln:
+    image: elementsproject/lightningd:v0.12.1
+    restart: on-failure
+    volumes:
+      - "/home/keiichi/temp/lightning:/root/.lightning"
+    ports:
+      - "39735:39735"
+    environment:
+      LIGHTNINGD_NETWORK: signet
+      LIGHTNINGD_PORT: 39735
+    command:
+      - --bitcoin-rpcuser=bitcoiner
+      - --bitcoin-rpcpassword=donttrustverify
+      - --bitcoin-rpcconnect=192.168.1.103
+      - --bitcoin-rpcport=38332
+# iPアドレスはbitcoindのrpcallowに合わせて定義する
+    networks:
+      cln_net:
+        ipv4_address: 172.16.0.10
+
+networks:
+  cln_net:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 172.16.0.0/16
+
