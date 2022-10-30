@@ -1,0 +1,57 @@
+version: "3.7"
+
+services:
+
+  bitcoind:
+    image: lncm/bitcoind:v23.0@sha256:57317c90d89156a30327fe1b8e51b836e0fd1a8ba13721eb2e75e6b35a570e26
+    restart: on-failure
+    volumes:
+      - "/home/keiichi/temp/bitcoin:/data/.bitcoin"
+    ports:
+      - 38333:38333 # p2p
+      - 38332:38332 # rpc
+    networks:
+      csignet_net:
+        ipv4_address: 172.16.10.10
+
+  cln:
+    image: elementsproject/lightningd:v0.12.1
+    restart: on-failure
+    depends_on:
+      -  bitcoind
+    volumes:
+      - "/home/keiichi/temp/lightning:/root/.lightning"
+    ports:
+      - "39735:39735" # p2p
+    environment:
+      LIGHTNINGD_NETWORK: signet
+#      LIGHTNINGD_PORT: 39735
+    networks:
+      csignet_net:
+        ipv4_address: 172.16.10.20
+
+  lnd:
+    image: lightninglabs/lnd:v0.15.3-beta@sha256:93b4055bf4fb040907587bdf806c5bc6d42bd21b5b90f26df0c86471c8245ca8
+    user: 1000:1000
+    restart: on-failure
+    ports:
+      - "49735:39735" # p2p
+      - "28080:8080"  # REST
+      - "20009:10009" # gRPC
+    volumes:
+      - "/home/keiichi/temp/lnd:/data/.lnd"
+    environment:
+      HOME: /data
+    networks:
+      csignet_net:
+        ipv4_address: 172.16.10.30
+
+
+networks:
+  csignet_net:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 172.16.0.0/16
+

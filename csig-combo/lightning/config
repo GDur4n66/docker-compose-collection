@@ -1,0 +1,15 @@
+## [Bitcoin control options]
+# docker-compose にてLIGHTNINGD_NETWORK=signetとしているのでconfigで指定は不要。
+# network=signet
+bitcoin-rpcuser=bitcoiner
+bitcoin-rpcpassword=donttrustverify
+bitcoin-rpcconnect=172.16.10.10
+bitcoin-rpcport=38332
+# alias=NAME
+
+
+## [Experimental Options]
+experimental-onion-messages
+experimental-offers
+experimental-dual-fund
+
