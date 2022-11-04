@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  main:
+    image: elementsproject/lightningd:v0.12.1
+    restart: on-failure
+    ports: 
+      - 39735:39735
+    environment:
+      LIGHTNINGD_NETWORK: signet
+    command:
+      - --bitcoin-rpcuser=bitcoiner
+      - --bitcoin-rpcpassword=donttrustverify
+      - --bitcoin-rpcconnect=192.168.1.103
+      - --bitcoin-rpcport=38332
+      - --alias=CLN node(signet)
+      - --experimental-onion-messages
+      - --experimental-offers
+    network_mode: "bridge"
