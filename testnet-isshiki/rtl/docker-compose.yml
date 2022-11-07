@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+
+  rest:
+    image: saubyk/c-lightning-rest:0.9.0
+    restart: on-failure
+    environment:
+      PORT: 8080
+      PROTOCOL: "http"
+    volumes:
+      - "${PWD}/rest:/usr/src/app/certs"
+      - "/home/pi4/cln/lightning:/root/.lightning"
+
+  main:
+    image: shahanafarooqui/rtl:0.13.1
+    restart: on-failure
+    ports:
+      - 3005:3005
+    depends_on: [ rest ]
+    environment:
+      PORT: 3005
+      LN_IMPLEMENTATION: CLN
+      LN_SERVER_URL: "http://rest:8080"
+      APP_PASSWORD: "donttrustverify"
+      MACAROON_PATH: "/c-lightning-rest/certs"
+      CONFIG_PATH: "/root/.lightning/config"
+      RTL_CONFIG_PATH: /data
+      RTL_COOKIE_PATH: /data/.cookie
+      ENABLE_OFFERS: "true"
+    volumes:
+      - "${PWD}/data:/data"
+      - "${PWD}/rest:/c-lightning-rest/certs"
+      - "/home/pi4/cln/lightning:/root/.lightning"
+

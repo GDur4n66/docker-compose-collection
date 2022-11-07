@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  main:
+    image: prettyrollcake/cln:v0.12.1@sha256:7fa7ec73351231931e8a58418f8aaa74b47890144b27a5ddb70c281d494c44a3
+    restart: on-failure
+    ports: 
+      - 19735:19735
+    volumes:
+      - "${PWD}/lightning:/data/.lightning"
+    environment:
+      LIGHTNINGD_NETWORK: testnet
+    networks:
+      my-network:
+        ipv4_address: 172.40.10.10
+
+
+networks:
+  my-network:
+    external: true
+

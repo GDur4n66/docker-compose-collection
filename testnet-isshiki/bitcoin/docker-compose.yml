@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+
+  main:
+    image: lncm/bitcoind:v23.0@sha256:57317c90d89156a30327fe1b8e51b836e0fd1a8ba13721eb2e75e6b35a570e26
+    restart: on-failure
+    volumes:
+      - ${PWD}/data:/data/.bitcoin
+    ports:
+      - 18333:18333
+      - 18332:18332
+    networks:
+      my-network:
+        ipv4_address: 172.40.0.10
+
+networks:
+  my-network:
+    name: my-network
+    driver: bridge
+    enable_ipv6: false
+    ipam:
+     driver: default
+     config:
+       - subnet: 172.40.0.0/16
+
