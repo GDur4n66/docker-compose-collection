@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+
+  main:
+    image: lncm/bitcoind:v23.0@sha256:57317c90d89156a30327fe1b8e51b836e0fd1a8ba13721eb2e75e6b35a570e26
+    restart: on-failure
+    volumes:
+      - "${PWD}/data:/data/.bitcoin"
+    ports:
+      - 18333:18333 # p2p
+      - 18332:18332 # prc
+      - 28332:28332 # zmqpubrawblock
+      - 28333:28333 # zmqpubrawtx
+    networks:
+      bitcoin-net:
+        ipv4_address: 172.40.0.10
+
+
+networks:
+  bitcoin-net:
+    name: bitcoin-net
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 172.40.0.0/16
+

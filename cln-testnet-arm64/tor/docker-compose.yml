@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  main:
+    image: lncm/tor:latest
+    user: toruser
+    restart: always
+    volumes:
+        - ${PWD}/torrc:/etc/tor/torrc:ro
+        - ${PWD}/data:/data
+    environment:
+        HOME: "/tmp"
+    network_mode: host
+

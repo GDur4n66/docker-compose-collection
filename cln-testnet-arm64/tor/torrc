@@ -1,0 +1,10 @@
+SocksPort   0.0.0.0:9050
+ControlPort 0.0.0.0:9051
+
+# tor --hash-password donttrustverify          
+HashedControlPassword 16:6541367215D1C24960F7EF02EF582A03CE60810D5954C05CF3C5901E31
+
+# Bitcoin Core Frontend Hidden Service
+# HiddenServiceDir /data/bitcoin-p2p
+# HiddenServicePort 18333 192.168.1.105:18334
+

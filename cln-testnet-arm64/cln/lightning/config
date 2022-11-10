@@ -1,0 +1,45 @@
+# [General options]
+
+
+# [Bitcoin control options]
+network=testnet
+bitcoin-rpcconnect=172.40.0.10
+bitcoin-rpcport=18332
+bitcoin-rpcuser=bitcoiner
+bitcoin-rpcpassword=donttrustverify
+
+
+# [Lightning daemon options]
+log-file=/data/.lightning/log.txt
+
+
+# [Lightning node customization options]
+# alias=MY-CLN-NODE
+fee-base=0
+fee-per-satoshi=0
+
+
+# [Lightning channel and HTLC options]
+large-channels
+
+
+# [Payment control options]
+disable-mpp
+
+
+# [Networking options]
+bind-addr=172.40.10.10:9735
+proxy=192.168.1.105:9050
+addr=statictor:192.168.1.105:9051
+tor-service-password=donttrustverify
+always-use-proxy=true
+
+
+# [Lightning Plugins]
+
+
+# [Experimental Options]
+experimental-onion-messages
+experimental-offers
+# experimental-dual-fund
+
