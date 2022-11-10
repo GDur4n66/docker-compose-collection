@@ -9,3 +9,7 @@ testnet-isshiki<br>
 pi4ユーザのホームディレクトリ/home/pi4にこれらを展開<br>
 bitcoinのテストネットで初期同期が終わったら、electrsでDB構築し,mempoolでブロックエクスプローラが事項可能に。<br>
 clnでCore-lightning、rtlでRide-The-Lightningを展開してGUIでCLNを管理する。
+
+cln-testnet-arm64<br>
+ラズパイ4でbitcoind, cln, torで構成する。<br>
+clnが自分で作ったv0.12.1のイメージ担ってる。
