@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  LND:
+    image: lightninglabs/lnd:v0.15.5-beta
+    user: 1000:1000
+    restart: on-failure
+    depends_on:
+      - db
+    ports: 
+     - 9735:9735 # P2P
+     - 10009:10009 # gRPC
+     - 8080:8080 # REST
+    volumes:
+     - ${PWD}/lnd:/.lnd
+    networks:
+      lnd-experiment:
+        ipv4_address: 172.16.10.10
+
+  db:
+    image: postgres:10.20-stretch@sha256:130e08bb19199bd055e585e8938c5ebb0555dc13b445fad5b0bd727e4b75149c
+    user: "1000:1000"
+    restart: on-failure
+    stop_grace_period: 1m
+    volumes:
+        - ${PWD}/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=lnd
+      - POSTGRES_DB=lnd
+      - POSTGRES_PASSWORD=lnd
+    networks:
+      lnd-experiment:
+        ipv4_address: 172.16.10.20
+
+networks:
+  lnd-experiment:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 172.16.0.0/16
+
