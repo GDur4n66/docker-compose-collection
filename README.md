@@ -2,12 +2,13 @@
 自分で作ったりしたdocker-compose.ymlを保管する
 
 **LightningNode**<br>
-* ライトニングノードLNDとLND管理ツールThunderhubで構成。<br>
-* LNDはneutrinoを使うのでbitcoindは不要。<br>
-* 9735番は他のライトニングノードから接続されるための待ち受けポート。外部から接続できるようにすること。<br>
+* ライトニングノードLNDとLND管理ツールThunderhubで構成。
+* LNDはneutrinoを使うのでbitcoindは不要。
+* 9735番は他のライトニングノードから接続されるための待ち受けポート。外部から接続できるようにすること。
 * LNDのAPIポートである10009,8080番とThunderhubの3000番まで開けるかは任意だが、WireGuardやTailscaleなどVPNを使用して自分だけ利用できる方がセキュリティ的に望ましいと思う。
-* 初回にupしたらdocker exec -it lnd bashで入り、lncli createとやってLND用のウォレットを作成すること。<br>
+* 初回にupしたらdocker exec -it lnd bashで入り、lncli createとやってLND用のウォレットを作成すること。
 * LNDは起動時にウォレットunlockが必要なので、docker exec -it lnd lncli unlockとやってパスワード入力してunlockする。 
+* Thunderhubのログインページが表示されない場合はdocker restart thunderhubとやって再起動してみる。
 
 **saisho_cln_signet**<br>
 * 自ホストにsignet nodeがあり、rpc-allow=172.17.0.0/16でrpcを0.0.0.0にバインドしていること<br>
