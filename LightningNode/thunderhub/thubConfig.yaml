@@ -1,0 +1,7 @@
+accounts:
+  - name: myLND
+    serverUrl: 127.0.0.1:10009
+    certificatePath: /lnd/tls.cert
+    macaroonPath: /lnd/data/chain/bitcoin/mainnet/admin.macaroon
+    password: lightning
+    Network: mainnet

@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  main:
+    container_name: lnd
+    image: lightninglabs/lnd:v0.16.2-beta
+    user: 1000:1000
+    restart: on-failure
+    environment:
+      HOME: /data
+    volumes:
+     - ${PWD}/lnd:/data/.lnd
+    network_mode: host
+
+  admin:
+    container_name: thunderhub
+    image: apotdevin/thunderhub:v0.13.18
+    restart: on-failure
+    stop_grace_period: 1m
+    volumes:
+      - ${PWD}/thunderhub:/data
+      - ${PWD}/lnd:/lnd:ro
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "3000"
+      ACCOUNT_CONFIG_PATH: "/data/thubConfig.yaml"
+      NO_VERSION_CHECK: "false"
+    network_mode: host
