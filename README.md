@@ -9,6 +9,7 @@
 * 初回にupしたらdocker exec -it lnd bashで入り、lncli createとやってLND用のウォレットを作成すること。
 * LNDは起動時にウォレットunlockが必要なので、docker exec -it lnd lncli unlockとやってパスワード入力してunlockする。 
 * Thunderhubのログインページが表示されない場合はdocker restart thunderhubとやって再起動してみる。
+* lnd.confのexternalipにホストのグローバルIPアドレスを指定する。
 
 **saisho_cln_signet**<br>
 * 自ホストにsignet nodeがあり、rpc-allow=172.17.0.0/16でrpcを0.0.0.0にバインドしていること<br>
