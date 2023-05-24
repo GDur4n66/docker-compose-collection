@@ -1,6 +1,12 @@
 # docker-compose-collection
 自分で作ったりしたdocker-compose.ymlを保管する
 
+LightningNode<br>
+ライトニングノードLNDとLND管理ツールThunderhubで構成。<br>
+LNDはneutrinoを使うのでbitcoindは不要。<br>
+9735番は他のライトニングノードから接続されるための待ち受けポート。外部から接続できるようにすること。<br>
+LNDのAPIポートである10009,8080番とThunderhubの3000番まで開けるかは任意だが、WireGuardやTailscaleなどVPNを使用して自分だけ利用できる方がセキュリティ的に望ましいと思う。
+
 saisho_cln_signet<br>
 自ホストにsignet nodeがあり、rpc-allow=172.17.0.0/16でrpcを0.0.0.0にバインドしていること<br>
 CLNコンテナから0.0.0.0:38332へ接続する<br>
